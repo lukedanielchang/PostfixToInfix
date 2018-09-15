@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This program will take a postfix expression and 
+ * create an algebraic expression.
  */
 package postfixtoinfix;
 
@@ -24,11 +23,10 @@ import javax.swing.SwingConstants;
 public class PostfixToInfix {
 
     /**
-     * @param args the command line arguments
+     * initialize textfields and button
      */
     public JTextField inputText = new JTextField(20);
     public JTextField resultText = new JTextField(20);
-
     public JButton evaluateButton = new JButton("Construct Tree");
     //Create GUI
  public PostfixToInfix(){
@@ -48,9 +46,11 @@ public class PostfixToInfix {
         //create Labels
         JLabel inputLabel = new JLabel("Enter Postfix Expression: ", SwingConstants.CENTER);
         JLabel resultLabel = new JLabel("Infix Expression: ", SwingConstants.CENTER);
+       //make resulting feild uneditable
         resultText.setEditable(false);
-        //create button
-        evaluateButton = new JButton("evaluate");
+        //create construct tree button
+        evaluateButton = new JButton("Construct Tree");
+        //add event handler to button
        
         //Set Font to fields
         inputLabel.setFont(f);
