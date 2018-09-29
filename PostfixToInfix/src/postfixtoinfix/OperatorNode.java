@@ -20,7 +20,7 @@ public class OperatorNode extends Node {
   private File file;
   private PrintWriter printWriter;
   private String registerName;
-  private static int counter = 0;
+  private static int i = 0;
 
   // Constructor
   public OperatorNode(String operator, Node right, Node left) {
@@ -36,25 +36,28 @@ public class OperatorNode extends Node {
 
   // Setter
   public void setName() {
-    this.registerName = "R" + counter;
-    counter++;
+    this.registerName = "R" + i;
+    i++;
   }
 
-  // Initialize file and writer to print output to file, call methods
-  // to print three address instructions to file and close writer
-  public void printOutput() {
-    file = new File("file.txt");
+    /* Initialize file and writer to print output to file, call methods
+    * to print three address instructions to file and close writer
+    */  
+  public void printFile() {
+    file = new File("ExpressionTree.txt");
     try {
       printWriter = new PrintWriter(file);
       this.postOrderWalk(printWriter);
       printWriter.close();
-      counter = 0;
+      i = 0;
     } catch (FileNotFoundException ex) {
-      System.out.println("File not found!");
+      System.out.println("File Does Not Exist");
     }
   }
 
-  // Method to walk tree and print three address instructions to file
+  /*postOrderWalk traverses the tree 
+   *print three address instructions to ExpressionTree.txt file
+   */
   public void postOrderWalk(PrintWriter printWriter) {
     left.postOrderWalk(printWriter);
     right.postOrderWalk(printWriter);
@@ -67,14 +70,14 @@ public class OperatorNode extends Node {
         + leftValue + " " + rightValue);
   }
 
-  // Method to walk tree and return infix expression
+  //inOrderWalk traverses the tree to return final infix expression
   public String inOrderWalk() {
     leftValue = left.inOrderWalk();
     rightValue = right.inOrderWalk();
     return "(" + leftValue + " " + operator + " " + rightValue + ")";
   }
 
-  // Method to return proper operation for three address output
+  //  getOutputMethod returns operation for three address output in the txt file
   private static String getOutput(String operation) {
     switch (operation) {
       case "+":
@@ -86,6 +89,6 @@ public class OperatorNode extends Node {
       case "/":
         return "Div";
     }
-    return "Err";
+    return "Errr";
   }
 }
